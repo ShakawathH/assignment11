@@ -5,6 +5,9 @@ import time
 import pytest
 from playwright.sync_api import sync_playwright
 import requests
+import os
+
+os.environ.setdefault("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/fastapi_db")
 
 @pytest.fixture(scope='session')
 def fastapi_server():
