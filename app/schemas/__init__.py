@@ -1,23 +1,6 @@
 # app/schemas/__init__.py
-"""
-Pydantic Schemas Package
+"""Pydantic schemas used for request validation and response serialization."""
 
-This package contains all Pydantic models used for request/response validation
-and serialization. Schemas define the structure of data exchanged with clients.
-"""
+from app.schemas.calculation import CalculationType, CalculationCreate, CalculationRead
 
-from app.schemas.calculation import (
-    CalculationType,
-    CalculationBase,
-    CalculationCreate,
-    CalculationUpdate,
-    CalculationResponse
-)
-
-__all__ = [
-    "CalculationType",
-    "CalculationBase",
-    "CalculationCreate",
-    "CalculationUpdate",
-    "CalculationResponse"
-]
+__all__ = ["CalculationType", "CalculationCreate", "CalculationRead"]
