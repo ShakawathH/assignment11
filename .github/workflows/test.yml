@@ -7,9 +7,11 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: postgresql://user:password@localhost:5432/myappdb
     services:
       postgres:
-        image: postgres:latest
+        image: postgres:16
         env:
           POSTGRES_USER: user
           POSTGRES_PASSWORD: password
@@ -40,11 +42,11 @@ jobs:
           python -m venv venv
           source venv/bin/activate
           pip install -r requirements.txt
-          playwright install
+          playwright install --with-deps chromium
       - name: Run tests
         run: |
           source venv/bin/activate
-          pytest tests/unit/ --cov=src --junitxml=test-results/junit.xml
+          pytest tests/unit/ --junitxml=test-results/junit.xml
           pytest tests/integration/
           pytest tests/e2e/
   security:
@@ -85,6 +87,6 @@ jobs:
           tags: |
             shakawathh/assignment11:latest
             shakawathh/assignment11:${{ github.sha }}
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           cache-from: type=registry,ref=shakawathh/assignment11:cache
           cache-to: type=inline,mode=max
